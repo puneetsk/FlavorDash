@@ -4,14 +4,26 @@
     left: 0;
     width: 100%;
     height: 5rem;
-    background-color: #8a2b06;
-    color: white;
+    background-color: #392e4d;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 10%;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 10px 5px rgba(0, 0, 0, 0.5);
     z-index: 10;
+  }
+
+  .logo {
+    font-family: 'Pacifico', cursive;
+    color: #fff;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo img {
+    width: 3rem;
+    height: 3rem;
+    margin-left: 1rem;
   }
   
   .main-image {
