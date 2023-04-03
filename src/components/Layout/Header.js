@@ -3,7 +3,7 @@ import mealsImg from '../../assets/images/meals.jpg';
 import Logoimg from '../../assets/images/logo.png';
 import HeaderStyles from './Header.module.css';
 import CartButton from './HeaderCartButton';
-const Header = () => {
+const Header = (props) => {
     return (
         <React.Fragment>
             <header className={HeaderStyles.header}>
@@ -11,7 +11,7 @@ const Header = () => {
                     FlavorDash
                     <img src={Logoimg} alt='FlavorDash'/>
                 </h1>
-                <CartButton/>
+                <CartButton onClick={props.cartOpenHandler}/>
             </header>
 
             <div className={HeaderStyles['main-image']}>
