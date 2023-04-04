@@ -8,11 +8,53 @@ const defaultCartState = {
 
 const reducerD = (state, action) => {
     if(action.type === 'ADD'){
-        const updateCartItem = state.items.concat(action.item);
-        const updateCartAmount = state.totalAmount + action.item.price * action.item.totalAmount;
+        const updateCartAmount = state.totalAmount + action.item.price * action.item.amount;
+        const existingItemIndex = state.items.findIndex((item) => item.id === action.item.id);
+        const existingCartItem = state.items[existingItemIndex];
+
+        let updatedCartItems;
+
+        if (existingItemIndex > -1) {  
+            const updatedCartItem = {
+                ...existingCartItem,
+                amount: existingCartItem.amount + action.item.amount
+            };
+
+            updatedCartItems = [...state.items]; // Copying over the old items array to find the item that was added 
+            updatedCartItems[existingItemIndex] = updatedCartItem;
+        }
+        else {
+            updatedCartItems = state.items.concat(action.item);            
+        }        
 
         return {
-            items: updateCartItem,
+            items: updatedCartItems,
+            totalAmount: updateCartAmount
+        }
+    }
+
+    if (action.type === 'REMOVE') {
+
+        const existingCartItemIndex = state.items.findIndex((item) => item.id === action.id)
+        const existingCartItem = state.items[existingCartItemIndex];
+        const updateCartAmount = state.totalAmount - existingCartItem.price;
+    
+        let updatedCartItems;
+
+        if (existingCartItem === 1) {
+            updatedCartItems = state.items.filter((item) => item.id !== action.id );
+        }
+        else {
+            const updatedCartItem = {
+                ...existingCartItem,
+                amount: existingCartItem.amount - 1
+            }
+            updatedCartItems[existingCartItemIndex] = updatedCartItem;
+        }
+
+
+        return {
+            items: updatedCartItems,
             totalAmount: updateCartAmount
         }
     }
