@@ -35,20 +35,21 @@ const reducerD = (state, action) => {
 
     if (action.type === 'REMOVE') {
 
-        const existingCartItemIndex = state.items.findIndex((item) => item.id === action.id)
+        const existingCartItemIndex = state.items.findIndex((item) => item.id === action.id);
         const existingCartItem = state.items[existingCartItemIndex];
         const updateCartAmount = state.totalAmount - existingCartItem.price;
     
         let updatedCartItems;
 
-        if (existingCartItem === 1) {
-            updatedCartItems = state.items.filter((item) => item.id !== action.id );
+        if (existingCartItem.amount === 1) {
+            updatedCartItems = state.items.filter(item => item.id !== action.id );
         }
         else {
             const updatedCartItem = {
                 ...existingCartItem,
                 amount: existingCartItem.amount - 1
             }
+            updatedCartItems = [...state.items];
             updatedCartItems[existingCartItemIndex] = updatedCartItem;
         }
 

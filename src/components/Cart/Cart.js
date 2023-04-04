@@ -17,10 +17,7 @@ const Cart = props => {
     }
 
     const onRemoveHandler = (id) => {
-        Cartctx.removeItem( {
-            id,
-            amount: -1
-        });
+        Cartctx.removeItem(id);
     }
 
 
